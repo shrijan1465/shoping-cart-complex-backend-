@@ -1,4 +1,5 @@
 #include<string>
+#include<unordered_map>
 using namespace std;
 
 class Item;
@@ -10,6 +11,9 @@ string name;
 int price;
 
 public:
+    Product (){
+
+    }
     Product(int u_id, string name, int price){
         this->name=name;
         this->price=price;
@@ -21,13 +25,17 @@ public:
         return name.substr(0,1);
     }
     friend class  Item;
+    friend class Cart;
 };
 
 class Item{
-   const Product product;
+    Product product;
     int quantity;
 
     public:
+    Item(){
+
+    }
     Item(Product p, int q):product(p), quantity(q){}
 
     int getItemPrice(){
@@ -36,11 +44,12 @@ class Item{
     string getItemInfo(){
         return to_string(quantity) + " x " +product.name + "RS. "+ to_string(quantity*product.price) + "\n";
     }
+    friend class Cart;
 
 };
 
 class Cart{
-    unordered_map<int, Item> items;
+    unordered_map<int,Item> items;
 public:
 
     void addProduct (Product product){
@@ -50,12 +59,16 @@ public:
     }
 
 else{
-    items (product.id).quantity += 1;
+    items [product.id].quantity += 1;
     }
 }
 
     int getTotal(){
-        if
+       int total= 0;
+         for (auto itemPair : items ){
+            auto item = itemPair.second;
+            total+=item.getItemPrice();
+         }
     }
     string viewCart(){
     if (items.empty()){
@@ -69,8 +82,11 @@ string itemizedList;
         itemizedList.append(item.getItemInfo());
     }
     return itemizedList + "\n Total amount : RS." + to_string(cart_total)+'\n';
-
 }
+
+    bool isEmpity(){
+        return items.empty();
+    }
 };
 
 
@@ -103,10 +119,11 @@ string productList;
 cout<<"Available Products "<<endl;
 
 for(auto product : allProducts) {
-
- productList.append(product.getDisplayName());
+         cout << product.getDisplayName();
+     //productList.append(product.getDisplayName());
 }
 cout<<"----------------------------"<<endl;
+
 string choice;
 cin>>choice;
 for (int i=0; i<allProducts.size(); i++){
@@ -122,13 +139,35 @@ return NULL;
 int main (){
 
 char action ;
+Cart cart;
+
 while (true){
     cout<<"select an action - (a)dd item, (v)iew cart, (C)heckout"<<endl;
     cin>> action;
 
     if (action== 'a'){
+        Product*product=chooseProduct();
+        if(product!=NULL){
+            cout<<"add to the cart "<<product->getDisplayName()<<endl;
+            cart.addProduct(*product);
+        }
+        else if (action=='v'){
+            //view the cart 
+            cout<<"-----------------------"<<endl;
+            cout<<cart.viewCart();
+            cout<<"-----------------------"<<endl;
+        }
+        else if (action == 'C' || action == 'c') {
+            cout << "Checking out...\n";
+            cout << cart.viewCart();
+            break;
+        }
+        else{
+             cout << "Invalid action! Try again." << endl;
 
+        }
     }
+    return 0;
 }
 
 }
