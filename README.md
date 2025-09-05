@@ -27,7 +27,6 @@ public:
     friend class  Item;
     friend class Cart;
 };
-
 class Item{
     Product product;
     int quantity;
