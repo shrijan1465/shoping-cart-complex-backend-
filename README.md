@@ -1,172 +1,55 @@
-#include<string>
-#include<unordered_map>
-using namespace std;
+This is a simple Shopping Cart backend system built using C++. It uses basic Object-Oriented Programming (OOP) concepts and Data Structures to simulate a shopping cart for an e-commerce platform.
 
-class Item;
-class Cart;
+✅ Features
 
-class Product{
-int id;
-string name;
-int price;
+View available products
 
-public:
-    Product (){
+Add products to cart
 
-    }
-    Product(int u_id, string name, int price){
-        this->name=name;
-        this->price=price;
-    }
-    string getDisplayName(){
-        return name + " : RS " + to_string(price) + "\n";
-    }
-    string getShortName(){
-        return name.substr(0,1);
-    }
-    friend class  Item;
-    friend class Cart;
-};
-class Item{
-    Product product;
-    int quantity;
+Remove products from cart
 
-    public:
-    Item(){
+View cart items
 
-    }
-    Item(Product p, int q):product(p), quantity(q){}
+Calculate total bill
 
-    int getItemPrice(){
-        return quantity*product.price;
-    }
-    string getItemInfo(){
-        return to_string(quantity) + " x " +product.name + "RS. "+ to_string(quantity*product.price) + "\n";
-    }
-    friend class Cart;
+Simple menu-driven console interface
 
-};
+💻 Technologies Used
 
-class Cart{
-    unordered_map<int,Item> items;
-public:
+Language: C++
 
-    void addProduct (Product product){
-    if(items.count(product.id)==0){
-    Item newItem(product,1);
-    items [product.id] = newItem;
-    }
+Concepts: Classes, Vectors, Functions, Basic DSA (if used), Console I/O
 
-else{
-    items [product.id].quantity += 1;
-    }
-}
+📁 Project Structure
+├── class.cpp             // Main logic , Product class
+├── main.h/.cpp          // Call / some Print's for user  
+├── README.md
 
-    int getTotal(){
-       int total= 0;
-         for (auto itemPair : items ){
-            auto item = itemPair.second;
-            total+=item.getItemPrice();
-         }
-    }
-    string viewCart(){
-    if (items.empty()){
-        return "Cart is empty";
-}
+⚙️ How to Run
+Using g++:
+g++ main.cpp -o shopping_cart
+./shopping_cart
 
-string itemizedList;
-    int cart_total = getTotal();
-    for(auto itemPair:items){
-        auto item = itemPair.second;
-        itemizedList.append(item.getItemInfo());
-    }
-    return itemizedList + "\n Total amount : RS." + to_string(cart_total)+'\n';
-}
+On Windows:
+g++ main.cpp -o shopping_cart.exe
+shopping_cart.exe
 
-    bool isEmpity(){
-        return items.empty();
-    }
-};
+🧠 Concepts Covered
 
+Classes and Objects
 
-#include<iostream>
-#include<vector>
-using namespace std;
+Vectors (dynamic arrays)
 
-vector<Product> allProducts = {
+Functions and modular code
 
-Product(1, "apple", 26),
+Loops and conditions
 
-Product(3,"mango", 16),
+Simple command-line interface (CLI)
 
-Product(2,"guava", 36),
+👤 Author
 
-Product(5, "banana", 56),
+Shrijan mishra
 
-Product(4,"strawberry", 29),
+📌 Note
 
-Product(6,"pineapple", 20),
-
-};
-
-Product* chooseProduct(){
-
-//Display the list of products
-
-string productList;
-
-cout<<"Available Products "<<endl;
-
-for(auto product : allProducts) {
-         cout << product.getDisplayName();
-     //productList.append(product.getDisplayName());
-}
-cout<<"----------------------------"<<endl;
-
-string choice;
-cin>>choice;
-for (int i=0; i<allProducts.size(); i++){
-    if(allProducts[i].getShortName()==choice){
-        return &allProducts[i];
-    }
-
-}
-cout<<"Item not found try latter"<<endl;
-return NULL;
-}
-
-int main (){
-
-char action ;
-Cart cart;
-
-while (true){
-    cout<<"select an action - (a)dd item, (v)iew cart, (C)heckout"<<endl;
-    cin>> action;
-
-    if (action== 'a'){
-        Product*product=chooseProduct();
-        if(product!=NULL){
-            cout<<"add to the cart "<<product->getDisplayName()<<endl;
-            cart.addProduct(*product);
-        }
-        else if (action=='v'){
-            //view the cart 
-            cout<<"-----------------------"<<endl;
-            cout<<cart.viewCart();
-            cout<<"-----------------------"<<endl;
-        }
-        else if (action == 'C' || action == 'c') {
-            cout << "Checking out...\n";
-            cout << cart.viewCart();
-            break;
-        }
-        else{
-             cout << "Invalid action! Try again." << endl;
-
-        }
-    }
-    return 0;
-}
-
-}
+This project is made for learning purposes. Feel free to use, modify, or extend it
