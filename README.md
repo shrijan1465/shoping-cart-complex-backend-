@@ -1,6 +1,6 @@
 This is a simple Shopping Cart backend system built using C++. It uses basic Object-Oriented Programming (OOP) concepts and Data Structures to simulate a shopping cart for an e-commerce platform.
 
-✅ Features
+-> Features
 
 View available products
 
@@ -14,19 +14,19 @@ Calculate total bill
 
 Simple menu-driven console interface
 
-💻 Technologies Used
+-> Technologies Used
 
 Language: C++
 
 Concepts: Classes, Vectors, Functions, Basic DSA (if used), Console I/O
 
 📁 Project Structure
-├── class.cpp             // Main logic , Product class
-├── main.h/.cpp          // Call / some Print's for user  
-├── README.md
+class.cpp             // Main logic , Product class
+main.h/.cpp          // Call / some Print's for user  
+README.md
 
 
-⚙️ How to Run
+-> How to Run
 Using g++:
 g++ main.cpp -o shopping_cart
 ./shopping_cart
@@ -35,7 +35,7 @@ On Windows:
 g++ main.cpp -o shopping_cart.exe
 shopping_cart.exe
 
-🧠 Concepts Covered
+-> Concepts Covered
 
 Classes and Objects
 
@@ -47,7 +47,7 @@ Loops and conditions
 
 Simple command-line interface (CLI)
 
-👤 Author
+®Author
 
 Shrijan mishra
 
