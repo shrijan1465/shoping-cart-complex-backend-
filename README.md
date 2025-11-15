@@ -20,7 +20,7 @@ Language: C++
 
 Concepts: Classes, Vectors, Functions, Basic DSA (if used), Console I/O
 
-📁 Project Structure
+-> Project Structure
 class.cpp             // Main logic , Product class
 main.h/.cpp          // Call / some Print's for user  
 README.md
